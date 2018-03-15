@@ -1,0 +1,254 @@
+{
+	"appName": {
+		"message": "VPN보다 더 나은 DotVPN."
+	},
+
+	"appShortName": {
+		"message": "DotVPN"
+	},
+
+	"appDesc": {
+		"message": "가장 강력한 Chrome용 VPN. 자유와 개인 정보 보호를 누려 보세요."
+	},
+
+
+	"forgotPassword": {
+		"message": "Forgot Password?"
+	},
+
+	"login": {
+		"message": "Login"
+	},
+
+	"signup": {
+		"message": "Sign Up"
+	},
+
+	"signin": {
+		"message": "Login"
+	},
+
+	"alreadySign": {
+		"message": "Already have an account?"
+	},
+
+	"createAccount": {
+		"message": "Don't have an account?"
+	},
+
+	"signupTitle": {
+		"message": "Security is just one click away"
+	},
+
+	"namePlaceholder": {
+		"message": "First Name"
+	},
+
+	"lastNamePlaceholder": {
+		"message": "Last Name"
+	},
+
+	"emailPlaceholder": {
+		"message": "Email"
+	},
+
+	"passwordPlaceholder": {
+		"message": "Password"
+	},
+
+	"notConnected": {
+		"message": "You are not connected!"
+	},
+
+	"outOfMoney": {
+		"message": "Your Account is out of money"
+	},
+
+	"refill": {
+		"message": "Please, refill it in your Control Panel"
+	},
+
+	"refillButton": {
+		"message": "Refill DotVPN balance"
+	},
+
+	"connecting": {
+		"message": "Connecting"
+	},
+
+	"connected": {
+		"message": "Connected"
+	},
+
+	"disconnected": {
+		"message": "Disconnected"
+	},
+
+	"publicAddress": {
+		"message": "Public Address"
+	},
+
+	"privateAddress": {
+		"message": "Private Address"
+	},
+
+	"serverLocation": {
+		"message": "Server Location"
+	},
+
+	"ping": {
+		"message": "Ping to Server"
+	},
+
+	"distance": {
+		"message": "Distance to Server"
+	},
+
+	"protocolType": {
+		"message": "Protocol Type"
+	},
+
+	"firewall": {
+		"message": "DotVPN Firewall"
+	},
+
+	"firewallOffState": {
+		"message": "Not active"
+	},
+
+	"firewallOnState": {
+		"message": "Active"
+	},
+
+	"rqsProtected": {
+		"message": "Requests protected:"
+	},
+
+	"de": {
+		"message": "Germany"
+	},
+
+	"us": {
+		"message": "USA"
+	},
+
+	"fr": {
+		"message": "France"
+	},
+
+	"uk": {
+		"message": "UK"
+	},
+
+	"ru": {
+		"message": "Russia"
+	},
+
+	"sg": {
+		"message": "Singapore"
+	},
+
+	"nl": {
+		"message": "Nederland"
+	},
+
+	"jp": {
+		"message": "Japan"
+	},
+
+	"se": {
+		"message": "Sweden"
+	},
+
+	"autoStart": {
+		"message": "Automatic connection"
+	},
+
+	"account": {
+		"message": "Account:"
+	},
+
+	"manageAccount": {
+		"message": "Manage your account"
+	},
+
+	"contactSupport": {
+		"message": "Contact Support"
+	},
+
+	"logout": {
+		"message": "Logout"
+	},
+
+	"appVersion": {
+		"message": "App version"
+	},
+
+	"upToDate": {
+		"message": "Up to date"
+	},
+
+	"ms": {
+		"message": "ms"
+	},
+
+	"km": {
+		"message": "km"
+	},
+
+	"connSpeed": {
+		"message": "Connection Speed"
+	},
+
+	"bwunlim": {
+		"message": "Up to 100 Mbit/s"
+	},
+
+	"bw50mbit": {
+		"message": "Up to 50 Mbit/s"
+	},
+
+	"bw5mbit": {
+		"message": "Up to 5 Mbit/s"
+	},
+
+	"bw2mbit": {
+		"message": "Up to 2 Mbit/s"
+	},
+
+	"bw1mbit": {
+		"message": "Up to 1 Mbit/s"
+	},
+
+	"bw512kbit": {
+		"message": "Up to 0.5 Mbit/s"
+	},
+
+	"bwShared": {
+		"message": "Shared"
+	},
+
+	"accountType": {
+		"message": "Account Type"
+	},
+
+	"accountTypeFree": {
+		"message": "Free Account"
+	},
+
+	"accountTypePremium": {
+		"message": "Turbo Account"
+	},
+
+	"premiumTitle": {
+		"message": ", do you want more?"
+	},
+
+	"shareUsTitle": {
+		"message": ", please share us!"
+	},
+
+	"tellFriends": {
+		"message": "Tell your friends how great is DotVPN"
+	}
+}
