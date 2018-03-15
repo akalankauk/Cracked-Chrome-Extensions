@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DotVPN</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/css/main.css" media="screen" />
+	<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="/js/popup.js"></script>
+	<script type="text/javascript" src="/js/jquery.bez.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+	<div class="signin" id="signin-view" style="display:none">
+		<div class="sign">
+			<div class="logo" id="signin-logo"></div>
+			<div class="motto">Crazy VPN Service - @akalankauk</div>
+<!--
+			<div class="sign-connection">
+					<h3 id="conn-state-label" data-connected="Connected" data-connecting="Connecting" data-disconnected="Disconnected">Connected</h3>
+					<div class="toggle" id="connect-button">
+						<h3 id="timer"></h3>
+						<div class="switch">
+							<div class="switch-round">
+							</div>
+						</div>
+					</div>
+					<h1>Virtual location: United States</h1>
+			</div>
+-->
+			<div class="chart ch-welcome" id="welcome-chart"></div>
+		<!--Welcome-->
+				<div class="welcome" id="signin-email-box">
+					
+					<div class="title">
+						<h1>Welcome to Crazy VPN Service</h1>
+					</div>
+					<div class="itop input"><input type="text" id="signin-email" placeholder="Type your email"></div>
+					<div class="button" id="signin-email-button">Enjoy It</div>
+				</div>
+		<!--Signin-->
+				<div class="signin" id="signin-password-box">
+					<div class="title">
+						<!--<h1>Hi <span id="signin-user-name"></span>!</h1>-->
+						<h1>Welcome Back!</h1>
+					</div>
+					<div class="itop input"><input type="password" id="signin-password" placeholder="Type your password"></div>
+					<div class="button" id="signin-button">Sign In</div>
+					<div class="extra" id="password-reset-link1">Need to recover password?</div>
+				</div>
+		<!--Password-->
+				<div class="password" id="signin-password-retry-box">
+					<div class="title">
+						<h1>Incorrect password</h1>
+					</div>
+					<div class="itop input"><input type="password" id="signin-retry-password" placeholder="Type again your password"></div>
+					<div class="button" id="signin-retry-button">Sign In</div>
+					<div class="extra" id="password-reset-link">Need to recover password?</div>
+				</div>
+		<!--Activate-->
+				<div class="activate" id="password-reset-box">
+					<div class="title">
+						<h1>Check your inbox</h1>
+						<h4>We sent recovery to <span id="password-reset-email"></span></h4>
+					</div>
+					<div class="itop input"><input type="text" id="password-reset-code" placeholder="Type 4 digits code"></div>
+					<div class="button" id="password-activate-button">Activate</div>
+					<div class="extra" id="password-reset-change-email-link">Go back to login screen</div>
+				</div>
+		<!--NewPassword-->
+				<div class="newpassword" id="password-set-box">
+					<div class="title">
+						<h1>Create new password</h1>
+					</div>
+					<div class="itop input"><input type="password" id="password-set-password" placeholder="Type new password"></div>
+					<div class="button" id="password-set-button">Setup &amp; Login</div>
+				</div>
+		<!--Signup-->
+				<div class="signup" id="signup-step1-box">
+					<div class="title">
+						<h1>Hello, <span id="signup-email"></span>!</h1>
+					</div>
+					<div class="itop input"><input type="password" id="signup-password" placeholder="Create password for DotVPN"></div>
+					<div class="button" id="signup-step1-button">Next</div>
+					<div class="extra" id="signup-change-email-link">Change login address</div>
+				</div>
+				<div class="loader" id="loader"></div>
+		</div>
+	</div>
+	<div id="main-view" style="display:none">
+		<div id="app" class="app appmain app-green">
+		<div class="mainscreen">
+			<div style="display:none; position:absolute; height:500px; width:280px; top:0; left:0; background:url('/i/help-background.png') 0 0 no-repeat;background-size: 280px 500px;z-index:100;"></div>
+			<div class="header">
+				<div class="icon-menu"></div>
+				<div class="logo"></div>
+				<div class="icon-settings"></div>
+			</div>
+			<div class="appmain promo-off" id="promo">
+				<div class="connection">
+					<div class="toggle" id="connect-button">
+						<h3 id="timer"></h3>
+						<div class="switch">
+							<div class="switch-round">
+							</div>
+						</div>
+					</div>
+					<h3 id="conn-state-label" data-connected="Connected" data-connecting="Connecting" data-disconnected="Disconnected"></h3>
+				</div>
+				<div class="chart">
+					<div class="chart-dots-under"></div>
+					<div class="chart-white"></div>
+					<div class="chart-orange"></div>
+					<div class="chart-dots"></div>
+					<div class="chart-line"></div>
+				</div>
+				<div class="activity">
+					<h4>Crack Gone Wrong -  @akalankauk</h4>
+					<div class="advertising">
+						<h3>advertising</h3>
+						<h2 id="adblock-stat">0</h2>
+					</div>
+					<div class="trackers">
+						<h3>trackers</h3>
+						<h2 id="trackers-stat">0</h2>
+					</div>
+					<div class="analytics">
+						<h3>analytics</h3>
+						<h2 id="analytics-stat">0</h2>
+					</div>
+					<div class="firewall">
+						<h3>firewall</h3>
+						<h2 id="firewall-stat">0</h2>
+					</div>
+				</div>
+				<div class="map" style="background-position-x:100px;">
+
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 234" preserveAspectRatio="xMidYMid meet" class="mapline">
+					<path id="svg-path-ca" />
+					<path id="svg-path-us" />
+					<path id="svg-path-in" />
+					<path id="svg-path-sg" />
+					<path id="svg-path-jp" />
+					<path id="svg-path-ru" />
+					<path id="svg-path-il" />
+					<path id="svg-path-ro" />
+					<path id="svg-path-uk" />
+					<path id="svg-path-es" />
+					<path id="svg-path-se" />
+					<path id="svg-path-ch"/>
+					<path id="svg-path-be" />
+					<path id="svg-path-at" />
+					<path id="svg-path-pl" />
+					<path id="svg-path-it" />
+					<path id="svg-path-de" />
+					<path id="svg-path-fr" />
+					<path id="svg-path-nl" />
+					<path id="svg-path-us-ca" />
+					<path id="svg-path-si" />
+					<path id="svg-path-hk" />
+					<path id="svg-path-is" />
+					<path id="svg-path-im" />
+					<path id="svg-path-dk" />
+					<path id="svg-path-tr" />
+					<path id="svg-path-ie" />
+					<path id="svg-path-za" />
+					<path id="svg-path-no" />
+					<path id="svg-path-au" />
+<!--					<path id="svg-path-br" /> -->
+				</svg>
+
+					<div class="user" style="top: 85px;"></div>
+					<div id="map-points">
+					<div class="ca off"></div>
+					<div class="us off"></div>
+					<div class="sg off"></div>
+					<div class="jp off"></div>
+					<div class="ru off"></div>
+					<div class="uk off"></div>
+					<div class="es off"></div>
+					<div class="se off"></div>
+					<div class="ch off"></div>
+					<div class="de off"></div>
+					<div class="fr off"></div>
+					<div class="nl off"></div>
+					<div class="us-ca off"></div>
+					<div class="in off"></div>
+					<div class="be off"></div>
+					<div class="at off"></div>
+					<div class="il off"></div>
+					<div class="pl off"></div>
+					<div class="it off"></div>
+					<div class="si off"></div>
+					<div class="hk off"></div>
+					<div class="is off"></div>
+					<div class="im off"></div>
+					<div class="ro off"></div>
+					<div class="dk off"></div>
+					<div class="tr off"></div>
+					<div class="ie off"></div>
+					<div class="za off"></div>
+					<div class="no off"></div>
+					<div class="au off"></div>
+<!--					<div class="br off"></div> -->
+				</div>
+				</div>
+				<div class="coninfo">
+					<h5 id="connectionInfo">
+						<div id="connectionInfoData">
+						<p style="display:none" data-mode="on free premium">Your Virtual Location:</p>
+						<p style="display:none" data-mode="on free">Using Free Network</p>
+						<p style="display:none" data-mode="on premium">Using Premium Network</p>
+						<p style="display:none" data-mode="on free premium">Virtual IP <span data-value="nodeIp"></span></p>
+						<p style="display:none" data-mode="on free premium">Average Speed <span data-value="avgSpeed"></span> mbit/s</p>
+						<p style="display:none" data-mode="on free premium">Average Ping <span data-value="avgPing"></span> ms</p>
+						<p style="display:none" data-mode="on free premium">Network distance <span data-value="distance"></span> km</p>
+						<p style="display:none" data-mode="on free premium">Origin Location <span data-value="userCountry"></span></p>
+						<p style="display:none" data-mode="off free">Last Virtual Country:</p>
+						<p style="display:none" data-mode="off free premium">Waiting for Connection</p>
+					</div>
+					</h5>
+				</div>
+				<div class="countries">
+					<h3 id="country-block"><span id="country-label"></span> <span class="arrow"></span></h3>
+					
+				</div>
+				<div class="promobox">
+					<div id="turbo-start-box" style="display:none">
+						<h5>Welcome to DotVPN!</h5>
+						<h3>Activate our High Speed network:</h3>
+						<div class="button try" id="turbo-7day-button">Make DotVPN Faster</div>
+					</div>
+					
+					<div id="turbo-activating-box" style="display:none">
+						<div class="turbo-activating">
+							<h2 class="text-opacity" style="display:block">Activating Faster Network...</h2>
+						</div>
+					</div>
+					<div id="turbo-success-box" style="display:none">
+						<h2>Need a specific virtual country?</h2>
+						<h4>Fastest speed and double encryption</h4>
+						<div class="button" id="premium-cn-button">See Premium Locations</div>
+					</div>
+					<div id="turbo-notification-box" style="display:none">
+						<h2>Faster Network will expire soon</h2>
+						<h4>Triple your speed in Premium locations!</h4>
+						<div class="button" id="turbo-trial-button1">Go Premium Now</div>
+					</div>
+					<div id="turbo-end-box" style="display:none">
+						<h2>Your connection can be much faster</h2>
+						<h4>Try greatest speed in our Premium network</h4>
+						<div class="button" id="turbo-trial-button">Get DotVPN Premium</div>
+					</div>
+					
+					<div id="share-box" style="display:none">
+						<h2>Please, Share Us!</h2>
+						<h3>Is DotVPN a great service for you?</h3>
+						<div class="button fb" id="share-fb-button">Share</div>
+						<div class="button tw" id="share-tw-button">Tweet</div>
+					</div>
+					<div id="mobile-apps-box" style="display:none">
+						<h2>Stay Connected Everywhere!</h2>
+						<h3>Get DotVPN for phones and tablets:</h3>
+						<div class="button gplay" id="google-play-button1">Google Play</div>
+						<div class="button astore" id="app-store-button1">App Store</div>
+					</div>
+					<div class="no-connection" id="connect-fail-box" style="display:none">
+						<h4 class="text-opacity">Trying to connect</h4>
+						<h2>DotVPN can't connect to network</h2>
+						<h4>Check your Internet connection</h4>
+					</div>
+				</div>
+			</div>
+			<div id="selectcountry" class="selectcountry sc-off">
+				<div class="selectclose"></div>
+				<div class="list" id="country-list">
+					<div class="select" data-order="0" id="country-ca" data-code="ca">
+						<div class="icon ca"></div>
+						<div class="country"><span data-code="ca">Canada</span><b>Distance <span data-distance="ca">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="ca">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="ca">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="1" id="country-de" data-code="de">
+						<div class="icon de"></div>
+						<div class="country"><span data-code="de">Germany</span><b>Distance <span data-distance="de">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="de">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="de">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="2" id="country-fr" data-code="fr">
+						<div class="icon fr"></div>
+						<div class="country"><span data-code="fr">France</span><b>Distance <span data-distance="fr">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="fr">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="fr">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select jp" data-order="3" id="country-jp" data-code="jp">
+						<div class="icon jp"></div>
+						<div class="country"><span data-code="jp">Japan</span><b>Distance <span data-distance="jp">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="jp">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="jp">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="4" id="country-nl" data-code="nl">
+						<div class="icon nl"></div>
+						<div class="country"><span data-code="nl">Netherlands</span><b>Distance <span data-distance="nl">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="nl">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="nl">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="5" id="country-sg" data-code="sg">
+						<div class="icon sg"></div>
+						<div class="country"><span data-code="sg">Singapore</span><b>Distance <span data-distance="sg">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="sg">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="sg">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="6" id="country-es" data-code="es">
+						<div class="icon es"></div>
+						<div class="country"><span data-code="es">Spain</span><b>Distance <span data-distance="es">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="es">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="es">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="7" id="country-se" data-code="se">
+						<div class="icon se"></div>
+						<div class="country"><span data-code="se">Sweden</span><b>Distance <span data-distance="se">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="se">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="se">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="8" id="country-ch" data-code="ch">
+						<div class="icon ch"></div>
+						<div class="country"><span data-code="ch">Switzerland</span><b>Distance <span data-distance="ch">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="ch">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="ch">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="9" id="country-ru" data-code="ru">
+						<div class="icon ru"></div>
+						<div class="country"><span data-code="ru">Russia</span><b>Distance <span data-distance="ru">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="ru">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="ru">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select uk" data-order="10" id="country-uk" data-code="uk">
+						<div class="icon uk"></div>
+						<div class="country"><span data-code="uk">Great Britain</span> <b>Distance <span data-distance="uk">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="uk">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="uk">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="11" id="country-us" data-code="us">
+						<div class="icon us"></div>
+						<div class="country"><span data-code="us">US New York</span> <b>Distance <span data-distance="us">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="us">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="us">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="12" id="country-us-ca" data-code="us-ca">
+						<div class="icon us"></div>
+						<div class="country"><span data-code="us-ca">US California</span> <b>Distance <span data-distance="us-ca">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="us-ca">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="us-ca">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="13" id="country-in" data-code="in">
+						<div class="icon in"></div>
+						<div class="country"><span data-code="in">India</span> <b>Distance <span data-distance="in">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="in">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="in">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="14" id="country-be" data-code="be">
+						<div class="icon be"></div>
+						<div class="country"><span data-code="be">Belgium</span> <b>Distance <span data-distance="be">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="be">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="be">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="15" id="country-hk" data-code="hk">
+						<div class="icon hk"></div>
+						<div class="country"><span data-code="hk">Hong Kong</span> <b>Distance <span data-distance="hk">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="hk">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="hk">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="16" id="country-at" data-code="at">
+						<div class="icon at"></div>
+						<div class="country"><span data-code="at">Austria</span> <b>Distance <span data-distance="at">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="at">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="at">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="17" id="country-il" data-code="il">
+						<div class="icon il"></div>
+						<div class="country"><span data-code="il">Israel</span> <b>Distance <span data-distance="il">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="il">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="il">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="18" id="country-pl" data-code="pl">
+						<div class="icon pl"></div>
+						<div class="country"><span data-code="pl">Poland</span> <b>Distance <span data-distance="pl">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="pl">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="pl">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="19" id="country-it" data-code="it">
+						<div class="icon it"></div>
+						<div class="country"><span data-code="it">Italy</span> <b>Distance <span data-distance="it">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="it">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="it">100</span> <i>Mbit/s</i></b></div>
+					</div>
+						<div class="select" data-order="20" id="country-si" data-code="si">
+						<div class="icon si"></div>
+						<div class="country"><span data-code="si">Slovenia</span> <b>Distance <span data-distance="si">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="si">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="si">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="21" id="country-is" data-code="is">
+						<div class="icon is"></div>
+						<div class="country"><span data-code="is">Iceland</span> <b>Distance <span data-distance="is">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="is">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="is">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="22" id="country-im" data-code="im">
+						<div class="icon im"></div>
+						<div class="country"><span data-code="im">Isle of Man</span> <b>Distance <span data-distance="im">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="im">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="im">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="23" id="country-ro" data-code="ro">
+						<div class="icon ro"></div>
+						<div class="country"><span data-code="ro">Romania</span> <b>Distance <span data-distance="ro">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="ro">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="ro">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="24" id="country-dk" data-code="dk">
+						<div class="icon dk"></div>
+						<div class="country"><span data-code="dk">Denmark</span> <b>Distance <span data-distance="dk">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="dk">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="dk">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="25" id="country-tr" data-code="tr">
+						<div class="icon tr"></div>
+						<div class="country"><span data-code="tr">Turkey</span> <b>Distance <span data-distance="tr">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="tr">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="tr">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="26" id="country-ie" data-code="ie">
+						<div class="icon ie"></div>
+						<div class="country"><span data-code="ie">Ireland</span> <b>Distance <span data-distance="ie">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="ie">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="ie">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="27" id="country-za" data-code="za">
+						<div class="icon za"></div>
+						<div class="country"><span data-code="za">South Africa</span> <b>Distance <span data-distance="za">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="za">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="za">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="28" id="country-no" data-code="no">
+						<div class="icon no"></div>
+						<div class="country"><span data-code="no">Norway</span> <b>Distance <span data-distance="no">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="no">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="no">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<div class="select" data-order="29" id="country-au" data-code="au">
+						<div class="icon au"></div>
+						<div class="country"><span data-code="au">Australia</span> <b>Distance <span data-distance="au">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="au">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="au">100</span> <i>Mbit/s</i></b></div>
+					</div>
+					<!--
+					<div class="select" data-order="29" id="country-br" data-code="br">
+						<div class="icon br"></div>
+						<div class="country"><span data-code="br">Brazil</span> <b>Distance <span data-distance="br">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="br">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="br">100</span> <i>Mbit/s</i></b></div>
+					</div>
+
+					-->
+					<div class="select" data-order="50" id="country-fn" data-code="fn" style="display:none">
+						<div class="icon fn"></div>
+						<div class="country"><span data-code="fn">Free Network</span><b>Distance <span data-distance="fn">1000</span> km</b></div>
+						<div class="free">Ping <b><span data-ping="fn">100</span> <i>ms</i></b></div>
+						<div class="premium">Avg Speed <b><span data-premium-bw="fn">100</span> <i>Mbit/s</i></b></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="leftmenu">
+			<div class="top pointer" id="left-menu-account-button">
+				<h1 id="account-type-label" data-free-resource="accountTypeFree"
+						data-premium-resource="accountTypePremium"></h1>
+				<h2 id="email-label"></h2>
+			</div>
+			<div class="list">
+				<div id="menu-upgrade-button" style="display:none">
+					<div class="item">
+						<div class="ico ico-premium"></div>
+						<h3>Upgrade to Premium</h3>
+					</div>
+				</div>
+				<div id="menu-premium-button" style="display:none">
+					<div class="item">
+						<div class="ico ico-premium"></div>
+						<h3>Premium is Active</h3>
+					</div>
+				</div>
+				<div class="item" id="menu-change-password-button">
+					<div class="ico ico-password"></div>
+					<h3>Change Password</h3>
+				</div>
+				<div class="item" id="menu-share-button">
+					<div class="ico ico-share"></div>
+					<h3>Share with Friends</h3>
+				</div>
+				<div class="item" id="menu-rate-button">
+					<div class="ico ico-rate"></div>
+					<h3>Rate Our Service</h3>
+				</div>
+				<div class="item" id="menu-support-button">
+					<div class="ico ico-support"></div>
+					<h3>Customer Support</h3>
+				</div>
+			</div>
+			<div class="signout">Sign Out</div>
+			<div id="backl" class="back"></div>
+		</div>
+		<div class="rightmenu">
+			<div class="top">
+				<h1>Settings</h1>
+			</div>
+			<div class="list">
+				<div class="item">
+					<h3>Bandwidth Saver</h3>
+					<div class="toggle" id="bandwidth-saver-switch">
+						<div class="switch"></div>
+					</div>
+				</div>
+				<div class="item">
+					<h3>AdBlock</h3>
+					<div class="toggle" id="adblock-switch">
+						<div class="switch"></div>
+					</div>
+				</div>
+				<div class="item">
+					<h3>Tracking Protection</h3>
+					<div class="toggle" id="tracking-protection-switch">
+						<div class="switch"></div>
+					</div>
+				</div>
+				<div class="item">
+					<h3>Block Analytics</h3>
+					<div class="toggle" id="block-analytics-switch">
+						<div class="switch"></div>
+					</div>
+				</div>
+				<div class="item">
+					<h3>Firewall</h3>
+					<div class="toggle" id="firewall-switch">
+						<div class="switch"></div>
+					</div>
+				</div>
+				<div class="item">
+					<h3>Connect on Start</h3>
+					<div class="toggle" id="auto-start-switch">
+						<div class="switch"></div>
+					</div>
+				</div>
+				<div class="item">
+					<h3>Hide Application Icon</h3>
+					<div class="toggle" id="hide-app-icon">
+						<div class="switch"></div>
+					</div>
+				</div>
+				<div id="privacy" class="item pointer">
+					<h3>Privacy Policy</h3>
+					<div class="arrow"></div>
+				</div>
+				<div id="improve" class="item pointer">
+					<h3>Improve DotVPN</h3>
+					<div class="arrow"></div>
+				</div>
+				<div class="item">
+					<h3>App Version</h3>
+					<div class="appversion">
+					<h3 id="app-version"></h3>
+					</div>
+				</div>
+			</div>			
+			<div id="backr" class="back"></div>
+		</div>
+		</div>
+		<div id="privacy-popup" class="supup">
+			<div class="header">
+				<div class="title">Privacy Policy</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="content">
+				<div class="privacy">
+            DotVPN crack කරන්න ගහින් හරියට කරගන්න බැරි උනා. දැන් ip හැම තිස්සෙම මාරු වෙනවා.පස්සේ හදනකම් මේක use කරන්න.බැරි එවුන් ඕනි එකක් කරගන්.<br /><br />
+
+            එක හදාගන්න දන්න කෙනෙක් ඉන්නවනම් මටත් කියල දෙන්න. තැනකුයි.!<br /><br />
+
+            <b>1. FOREWORD</b><br /><br />
+
+            Site and the services available through it, are under the control of Smart Security Ltd. (the «Company»). Registered office: 18/F., Wanchai Central Building, 89 Lockhart Road, Wanchai, Hong Kong.<br /><br />
+
+            We are a leading supplier of tools to protect the confidentiality and anonymity in the Internet.<br /><br />
+
+            The Company undertakes to ensure the protection of your confidential information. Our Privacy Policy explains what information we collect about you, how we use the information we collect about you, how you can let us know if you prefer to limit the use of such information. Policy also establishes a set of procedures used by us to maintain the confidentiality of your information.<br /><br />
+
+            By providing your information, you consent to use such information in accordance with this privacy policy. If we change our privacy policy, any changes will be posted on this page without prior notice.<br /><br />
+
+            If you have any questions regarding these terms, please contact us by e-mail (info@dotvpn.com). Our privacy policy (the «Privacy Policy») applies when using our site. Before you start to use our site, carefully read the privacy policy. Starting to use the Website, you automatically accept our privacy policy and agree to comply with its provisions. If you do not agree with our privacy policy, please refrain from using of our Site.<br /><br />
+
+            <b>2. THE INFORMATION WE COLLECT</b><br /><br />
+
+            In order to provide services through the Site, we may collect personal information that will be used solely for display and personalization user personal cabinet for ease of administration and development services.  The company collects and stores the following information about users:<br /><br />
+
+            1. Registration info During registration, we will save your username, email address, password (in encrypted SHA256). We will need your user name and password for access you to the web control panel and to download software DotVPN. We need your email address to reset your password or if you want to receive our newsletter. We use personal information to provide services, which you ask us to provide. Unless you notify us that you do not wish to receive such information, we may occasionally inform you of our products and services. Informing us by email or by phone your personal information, you hereby consent to our use of your information in order to this Policy.<br /><br />
+
+            2. IP address of the user We store your IP address within 24 hours since you last connected. We need your IP-address to prevent spam, fraud or other abuse of our Site and our services.<br /><br />
+
+            3. Date of the registration We store the date of registration of your account to its own statistics, and to provide you in the future with favorable terms of use of the service and loyalty programs, about which you can read in the news section of the Website.<br /><br />
+
+            4. Payment Dates of subscription fee We store information about payment dates of subscription fee for the regulation and control of the timely payment and repayment of debts.<br /><br />
+
+            5. Information about visits of certain pages of the Site The company has the right to collect information about visits of certain pages of the Site, the frequency and duration of use of the service. All this information is used solely to provide services and improve service quality and development of all services.<br /><br />
+
+            6. Information about software version Where appropriate, we may store information on the software version used by the user to ensure compatibility with products and services.<br /><br />
+
+            7. Cookies Cookies – are small files that are stored in your browser. Using cookies different sites know you and restore specified settings for your convenience. DotVPN also uses cookies, to track orders, improve the quality of your services, etc.<br /><br />
+
+            Our cookies record the browser used by you, your language, you visit the page of our site and duration of the visit of each of them.<br /><br />
+            You can disable cookies in your browser settings, but in this case we can not guarantee the availability of all our products and services.<br /><br />
+            We use the following types of cookies: Cookies Google Analytics: __utma, __utmb, __utmc, __utmz. These files allow you to take into account the number of page impressions and traffic sources. With their help we are able to measure and improve the performance of our Site, using a service provided by Google Analytics.<br /><br />
+            Affiliate cookies: pid, fid. These files allow you to identify the partner who sent you to our site that will pay him a commission partnerships.<br /><br />
+            8. Data obtained during contacts with tech support or leaving comments on our Website. When you leave a comment on our website or contact our technical support service, we can keep your data up to two years if the legal reasons and exceptional circumstances require longer storage. We do not save or store users’ credit card information. Payments by credit cards are processed in real-time by authorized agents. Withdraw funds from the credit card is automatically and instantly. We do not store credit card data and other payment information. If the need to return of funds to the user, it is credited to the user’s credit card through authorized agencies.<br /><br />
+
+            <b>3. STORAGE AND USE OF INFORMATION</b><br /><br />
+
+            We do not sell or share your personal data, do not provide access to the history of user connections services to third parties. The only exception is decision of the Hong Kong Court with a demand to provide such access to representatives of law.<br /><br />
+
+            We reserve the right to use the information we collect for the following purposes:<br /><br />
+
+            We may contact you by phone or e-mail on quality issues or technical problems and other issues related to the Service, and for notification of changes in the composition and properties of services and information.<br /><br />
+
+            We may contact you to notify you about the expiration of Contract and offer the prolongation of services.<br /><br />
+
+            With your permission, we may contact you by phone or email for notifications about new DotVPN services and special DotVPN offers.<br /><br />
+
+            Your personal information that you trust us is stored on servers in Hong Kong. Only authorized DotVPN employees have access thereto, including our representatives located in other countries who can get access to some of the information regarding payment issues and the quality of services, and other information necessary for the development of services and assistance to users in a particular country.<br /><br />
+
+            We may share the information which is necessary for the implementation of services to third parties only with your permission. If our business will be subject to a merger or acquisition with another company, your information may become available for new business partners and owners. If only the law will not require it, we will not disclose, sell or distribute the information that we provide by users without their consent.<br /><br />
+
+            <b>4. PROTECTING OF YOUR INFORMATION</b><br /><br />
+
+            All information about customers, including their user names and passwords are stored in encrypted form. Algorithms used by us to protect the information can not be hacked by any of the currently existing methods. Multi-level corporate authentication system that we use ensures that access to your data will be provided only to those employees who are directly involved you acquire services.<br /><br />
+
+            Among DotVPN company there is a strict data protection system, suggesting heavy fines and even criminal liability for unauthorized access and distribution of our data.<br /><br /><br /><br />
+				</div>
+			</div>
+		</div>
+		<div id="improve-popup" class="supup sp-off">
+			<div class="header">
+				<div class="title">Improve DotVPN</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="content">
+				<div class="improve">
+					<div class="inside">
+						<div class="ico ico-improve"></div>
+						<h1>Help us make DotVPN better!</h1>
+						<h3>If you have any ideas how to<br />improve DotVPN - just write to us</h3>
+						<div class="input"><input type="text" id="improve-popup-subject" placeholder="Type Subject"></div>
+						<div class="textarea"><textarea id="improve-popup-text" placeholder="Type Message"></textarea></div>
+						<div class="button" id="improve-popup-send-button">Send</div>
+					</div>
+					<div class="step" id="improve-popup-loader">
+						<div class="ico-loading"></div>
+					</div>
+					<div class="step" id="improve-popup-finish">
+						<div class="ico-checked"></div>
+						<h2>Your message<br />has been sent</h2>
+						<div class="button" id="improve-close-button">Close</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="support-popup" class="supup sp-off">
+			<div class="header">
+				<div class="title">Customer Support</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="content">
+				<div class="support">
+					<div class="inside">
+						<div class="ico ico-support"></div>
+						<h1>Do you have any questions?</h1>
+						<h3>We are ready to help:</h3>
+						<div class="input"><input type="text" id="support-popup-subject" placeholder="Type Subject"></div>
+						<div class="textarea"><textarea id="support-popup-text" placeholder="Type Message"></textarea></div>
+						<div class="button" id="support-popup-send-button">Send</div>
+					</div>
+					<div class="step" id="support-popup-loader">
+						<div class="ico-loading"></div>
+					</div>
+					<div class="step" id="support-popup-finish">
+						<div class="ico-checked"></div>
+						<h2>Your question<br />has been sent</h2>
+						<div class="button" id="support-close-button">Close</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="rate-popup" class="supup sp-off">
+			<div class="header">
+				<div class="title">Rate Our Service</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="content">
+				<div class="rate">
+					<div class="inside">
+						<div class="ico ico-rate"></div>
+						<h1>Please, Review Us!</h1>
+						<p>Leave a comment about our application for people who are not yet with us. They will also be able to take advantage of the free Internet without limits with the highest encryption.</p>
+						<div class="button" id="rate-button">Review in <span id="popup-rate-browser" data-crm="Chrome" data-opr="Opera"></span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="share-popup" class="supup sp-off">
+			<div class="header">
+				<div class="title">Share with Friends</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="content">
+				<div class="share">
+					<div class="inside">
+						<div class="ico ico-share"></div>
+						<h1>Please, Share Us!</h1>
+						<p>Invite your friends to take advantage of the free Internet without limits with the highest encryption.</p>
+						<div class="button" id="popup-fb-button">Share on Facebook</div>
+						<div class="button" id="popup-tw-button">Post on Twitter</div>
+						<p>Together we will try to make the Internet a little better.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="change-password-popup" class="supup sp-off">
+			<div class="header">
+				<div class="title">Change Password</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="content">
+				<div class="password">
+					<div class="inside">
+						<div class="ico ico-password"></div>
+						<h1>Create a new password</h1>
+						<div class="input"><input type="password" id="popup-password" placeholder="Type New Password"></div>
+						<div class="input"><input type="password" id="popup-confirm-password" placeholder="Confirm New Password"></div>
+						<div class="button" id="popup-password-button">Change</div>
+					</div>
+					<div class="step" id="change-password-popup-loader">
+						<div class="ico-loading"></div>
+					</div>
+					<div class="step" id="change-password-popup-finish">
+						<div class="ico-checked"></div>
+						<h2>Your password<br />has been changed</h2>
+						<div class="button" id="change-password-close-button">Close</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="upgrade-popup" class="supup sp-off">
+			<div class="header">
+				<div class="title">Upgrade to Premium</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="content">
+				<div class="upgrade">
+					<div class="inside">
+						<h1>Go Premium.</h1>
+						<h2>Access our high-speed network</h2>
+						<p>Lots of virtual locations</p>
+						<p>Fastest connection speed</p>
+						<p>Double encryption</p>
+						<p>100% uptime network</p>
+						<p>No CAPTCHA on the web</p>
+						<p>No GEO restrictions</p>
+						<h5>Premium servers connects you even<br />DotVPN is blocked in your local network</h5>
+						<div class="button-yellow" id="popup-start-button">Upgrade now</div>
+						<h5>It is really a great experience</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="premium-popup" class="supup sp-off">
+			<div class="header">
+				<div class="title">Premium is Active</div>
+				<div class="icon-close"></div>
+			</div>
+			<div class="separator"></div>
+			<div class="content">
+				<div class="upgrade">
+					<div class="inside">            
+						<h1>Faster Network is active!</h1>
+						<h4>Your Premium includes:</h4>
+						<p>Triple speed through all DotVPN Premium locations.</p>
+						<p>Access to premium network even through VPN blocking on your local network or ISP.</p>
+						<p>Use it on your phone, tablet, or laptop - up to 5 devices at once.</p>
+						<p>Strong protection. Safe browsing.</p>
+						<p>No restrictions. No advertising.</p>
+						<h3>If you want to disable your account<br>you can do it in our plans section:</h3>
+						<div class="button" id="popup-plans-button">Manage Subscription</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
